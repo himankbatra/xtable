@@ -16,9 +16,9 @@ Ability to create an empty table of m rows and n columns.Ability to create a tab
 
 Example of horizontal and vertical tables are shown below.
 
-Horizontal Table 
+​                                                    Horizontal Table 
 ![img](https://lh6.googleusercontent.com/GMzUmkW8-AN_v9B7BIPAmoDf_VFRhka81M4CLn_O9NGT781-m-9-jFoo_btqM_khpPi7Fc4nGlKl3MCoQXioax2RS9Y0FO1mSeZNfdgEASVQ6rcoeHLlOoilrluEnze-mMUGFGp4)
 
-Vertical Table 
+​                                                        Vertical Table 
 ![img](https://lh6.googleusercontent.com/HD6E-qHcbZL2ZORBbIjWLaL9rFr6wrgJ6ydJbROlONXBZHWxn9z6eDEc9rMn2tgq9S8g_VAivRW8zNj94K-dOAKlv8yaDfpj6PJNbGwcnwUlSYpxekHSo9BjFjdh4L1j9EEflHs6)
 
