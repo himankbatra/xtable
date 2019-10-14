@@ -7,4 +7,4 @@ jobs: # a collection of steps
       
     steps: # a collection of executable commands
       - checkout
-      - run: chmod +x ./mvnw clean install
+      - run: ./mvnw clean install
