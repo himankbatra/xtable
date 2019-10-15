@@ -11,7 +11,7 @@ public class XtableTests {
         // Arrange
         Xtable xtable = new Xtable();
         // Act
-        xtable.createBlankTable(4,3).print();
+        xtable.createEmpty(4, 4).print();
         //Assert
         assertThat(xtable).isNotNull();
 
