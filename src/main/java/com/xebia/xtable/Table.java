@@ -27,11 +27,10 @@ public class Table {
 
 
     public String createEmpty() {
-        String blankSpace = String.join("", Collections.nCopies(this.columnWidth, " "));
         for (int i = 0; i < this.numberOfRows; i++) {
             String[] newRow = new String[this.numberOfColumns];
             for (int j = 0; j < this.numberOfColumns; j++) {
-                newRow[j] = blankSpace;
+                newRow[j] = " ";
             }
             this.rows.add(newRow);
         }
