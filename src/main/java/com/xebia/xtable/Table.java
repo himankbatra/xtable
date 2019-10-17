@@ -3,7 +3,6 @@ package com.xebia.xtable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class Table {
 
@@ -14,7 +13,7 @@ public class Table {
     private static final String HORIZONTAL_SEP = "-";
     private static final String VERTICAL_SEP = "|";
     private static final String JOIN_SEP = "+";
-    private ConsoleRenderer tableRenderer;
+    private TableRenderer tableRenderer;
     private String result;
 
 
@@ -34,20 +33,16 @@ public class Table {
             for (int j = 0; j < this.numberOfColumns; j++) {
                 newRow[j] = blankSpace;
             }
-            insertRows(newRow);
+            this.rows.add(newRow);
         }
         create();
         return result;
     }
 
-
-    public Table insertRows(String... newRow) {
-        if (Objects.isNull(newRow)) {
-            throw new IllegalArgumentException("rows should not be null");
-        }
-        this.numberOfColumns = this.numberOfColumns == 0 ? newRow.length : this.numberOfColumns;
-        this.rows.add(newRow);
-        return this;
+    public String shape() {
+        StringBuilder shape = new StringBuilder();
+        shape.append(this.numberOfRows).append("*").append(this.numberOfColumns);
+        return shape.toString();
     }
 
 
@@ -111,11 +106,11 @@ public class Table {
         private int columnWidth;
         private int numberOfRows;
         private int numberOfColumns;
-        private ConsoleRenderer tableRenderer;
+        private TableRenderer tableRenderer;
 
         public Builder() {
             this.columnWidth = 10;
-            this.tableRenderer = new ConsoleRenderer();
+            this.tableRenderer = new ConsoleBasedRenderer();
         }
 
 
@@ -134,7 +129,7 @@ public class Table {
             return this;
         }
 
-        public Builder withTableRender(ConsoleRenderer val) {
+        public Builder withTableRender(TableRenderer val) {
             tableRenderer = val;
             return this;
         }
