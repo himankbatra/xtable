@@ -8,7 +8,8 @@
 
 ![img](https://lh5.googleusercontent.com/tSinvEdjj3w5WWl58hwJ3vqSr1wJWq3TKwLp1gW3iFW2FUJdf3jTWVN_ljTfXSnp9vKjLwgtNRXrVbq6yaXWRaxj3nMGVLY5ByBArTSKKI7SkllxR7xk-nW0BSc6LW4A1T2NojF_)
 
-In the image shown above, a 4x4 table was generated. The first row was used for headings and rest of the rows were data rows.
+In the image shown above, a 4x4 table was generated. The first row was used for headings and rest of the rows were data
+ rows.
 
 The 0.1.0 version of the xtable library should support following features:
 Ability to create an empty table of m rows and n columns.Ability to create a table with headerAbility to create a table with header row and data rowsAbility to specify column widths. If the text of the column does not fit the column then it text should be truncated and … should be shown at the endDifferent columns can have different widthsLibrary should support both horizontal and vertical tablesLibrary should throw exceptions when data is invalid.
