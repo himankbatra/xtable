@@ -54,8 +54,12 @@ public class Table {
         StringBuilder table = new StringBuilder();
 
         int differenceInRows = this.numberOfRows - this.rows.size();
-        createEmpty(differenceInRows);
-
+        if (differenceInRows < 0) {
+            throw new InputMismatchException("Data rows exceeded the number of rows");
+        }
+        if (differenceInRows != 0) {
+            createEmpty(differenceInRows);
+        }
 
         for (int i = 0; i < numberOfRows; i++) {
             table.append(this.tableCreator.createLine(numberOfColumns, this.columnsWidth));
@@ -69,17 +73,12 @@ public class Table {
     }
 
     private void createEmpty(int differenceInRows) {
-        if (differenceInRows < 0) {
-            throw new InputMismatchException("Data rows exceeded the number of rows");
-        }
-        if (differenceInRows != 0) {
-            for (int i = 0; i < differenceInRows; i++) {
-                String[] row = new String[numberOfColumns];
-                for (int j = 0; j < numberOfColumns; j++) {
-                    row[j] = " ";
-                }
-                this.rows.add(row);
+        for (int i = 0; i < differenceInRows; i++) {
+            String[] row = new String[numberOfColumns];
+            for (int j = 0; j < numberOfColumns; j++) {
+                row[j] = " ";
             }
+            this.rows.add(row);
         }
     }
 
@@ -109,7 +108,7 @@ public class Table {
         public Builder withNumberOfColumns(int val) {
             this.numberOfColumns = val;
             this.columnsWidth = new int[numberOfColumns];
-            Arrays.fill(this.columnsWidth,TableConstants.DEFAULT_COLUMN_WIDTH);
+            Arrays.fill(this.columnsWidth, TableConstants.DEFAULT_COLUMN_WIDTH);
             return this;
         }
 
