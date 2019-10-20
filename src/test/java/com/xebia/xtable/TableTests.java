@@ -42,6 +42,7 @@ public class TableTests {
         Table table = new Table.Builder()
                 .withNumberOfRows(4)
                 .withNumberOfColumns(4)
+                .withColumnsWidth(20)
                 .build();
         table.create();
         String shape = table.shape();

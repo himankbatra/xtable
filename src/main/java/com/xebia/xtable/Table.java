@@ -121,10 +121,14 @@ public class Table {
         }
 
         public Builder withColumnsWidth(int... val) {
-            if (Objects.isNull(val) || val.length != this.numberOfColumns) {
+            if (Objects.isNull(val) || (val.length > 1 && val.length != this.numberOfColumns)) {
                 throw new IllegalArgumentException("number of columns width should be equal to number of columns");
             }
-            this.columnsWidth = val;
+            if (val.length == 1) {
+                Arrays.fill(columnsWidth, val[0]);
+            } else {
+                this.columnsWidth = val;
+            }
             return this;
         }
 
