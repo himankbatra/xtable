@@ -58,7 +58,7 @@ public class Table {
             throw new InputMismatchException("Data rows exceeded the number of rows");
         }
         if (differenceInRows != 0) {
-            createEmpty(differenceInRows);
+            createEmptyRows(differenceInRows);
         }
 
         for (int i = 0; i < numberOfRows; i++) {
@@ -72,7 +72,7 @@ public class Table {
         return table.toString();
     }
 
-    private void createEmpty(int differenceInRows) {
+    private void createEmptyRows(int differenceInRows) {
         for (int i = 0; i < differenceInRows; i++) {
             String[] row = new String[numberOfColumns];
             for (int j = 0; j < numberOfColumns; j++) {
