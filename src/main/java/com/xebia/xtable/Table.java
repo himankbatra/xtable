@@ -137,7 +137,7 @@ public class Table {
             return this;
         }
 
-        public Builder withTableCreator(TableElementCreator val) {
+        public Builder withTableElementCreator(TableElementCreator val) {
             this.tableElementCreator = val;
             return this;
         }
