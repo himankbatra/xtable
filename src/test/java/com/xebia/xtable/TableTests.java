@@ -154,4 +154,34 @@ public class TableTests {
 
     }
 
+    @Test
+    public void should_truncate_the_column_value_if_exceeding_the_given_column_width_when_valid_data_rows_and_header_are_provided() {
+
+        Table table = new Table.Builder()
+                .withNumberOfRows(4)
+                .withNumberOfColumns(2)
+                .withColumnWidth(5)
+                .withHeaderRow("sno","name")
+                .build();
+        String result = table
+                .insertRow("1", "himank")
+                .insertRow("2", "akash")
+                .insertRow("3", "varun")
+                 .create();
+
+        String expected = "+-------+-------+\n" +
+                          "| sno   | name  |\n" +
+                          "+-------+-------+\n" +
+                          "| 1     | hi... |\n" +
+                          "+-------+-------+\n" +
+                          "| 2     | akash |\n" +
+                          "+-------+-------+\n" +
+                          "| 3     | varun |\n" +
+                          "+-------+-------+\n";
+        assertThat(result).isEqualTo(expected);
+
+    }
+
+
+
 }
