@@ -18,7 +18,7 @@ public class Table {
 
     private Table(Builder builder) {
         rows = builder.rows;
-        columnWidth = builder.columnsWidth;
+        columnWidth = builder.columnWidth;
         numberOfRows = builder.numberOfRows;
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
@@ -88,7 +88,7 @@ public class Table {
         private int numberOfRows;
         private int numberOfColumns;
         private List<String[]> rows;
-        private int[] columnsWidth;
+        private int[] columnWidth;
         private TableRenderer tableRenderer;
         private TableElementCreator tableElementCreator;
 
@@ -107,8 +107,8 @@ public class Table {
 
         public Builder withNumberOfColumns(int val) {
             this.numberOfColumns = val;
-            this.columnsWidth = new int[numberOfColumns];
-            Arrays.fill(this.columnsWidth, TableConstants.DEFAULT_COLUMN_WIDTH);
+            this.columnWidth = new int[numberOfColumns];
+            Arrays.fill(this.columnWidth, TableConstants.DEFAULT_COLUMN_WIDTH);
             return this;
         }
 
@@ -120,14 +120,14 @@ public class Table {
             return this;
         }
 
-        public Builder withColumnsWidth(int... val) {
+        public Builder withColumnWidth(int... val) {
             if (Objects.isNull(val) || (val.length > 1 && val.length != this.numberOfColumns)) {
                 throw new IllegalArgumentException("number of columns width should be equal to number of columns");
             }
             if (val.length == 1) {
-                Arrays.fill(columnsWidth, val[0]);
+                Arrays.fill(columnWidth, val[0]);
             } else {
-                this.columnsWidth = val;
+                this.columnWidth = val;
             }
             return this;
         }

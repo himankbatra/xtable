@@ -42,7 +42,7 @@ public class TableTests {
         Table table = new Table.Builder()
                 .withNumberOfRows(4)
                 .withNumberOfColumns(4)
-                .withColumnsWidth(20)
+                .withColumnWidth(20)
                 .build();
         table.create();
         String shape = table.shape();
@@ -57,7 +57,7 @@ public class TableTests {
         Table table = new Table.Builder()
                 .withNumberOfRows(4)
                 .withNumberOfColumns(2)
-                .withColumnsWidth(10, 20)
+                .withColumnWidth(10, 20)
                 .withHeaderRow("sno", "name")
                 .build();
         String tableWithHeader = table.create();
@@ -81,7 +81,7 @@ public class TableTests {
                 .withNumberOfRows(4)
                 .withNumberOfColumns(2)
                 .withHeaderRow("sno", "name")
-                .withColumnsWidth(10, 20)
+                .withColumnWidth(10, 20)
                 .build();
         String result = table.insertRow("1", "himank")
                 .insertRow("2", "akash")
@@ -107,7 +107,7 @@ public class TableTests {
                 .withNumberOfRows(4)
                 .withNumberOfColumns(2)
                 .withHeaderRow("sno", "name")
-                .withColumnsWidth(10, 20)
+                .withColumnWidth(10, 20)
                 .build();
 
         try {
@@ -131,7 +131,7 @@ public class TableTests {
         Table table = new Table.Builder()
                 .withNumberOfRows(4)
                 .withNumberOfColumns(2)
-                .withColumnsWidth(5, 15)
+                .withColumnWidth(5, 15)
                 .withHeaderRow("sno", "name")
                 .build();
         String result = table.insertRow("1", "himank")
