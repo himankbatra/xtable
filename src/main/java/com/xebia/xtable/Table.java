@@ -8,21 +8,21 @@ import java.util.*;
 public class Table {
 
     private List<String[]> rows;
-    private int[] columnsWidth;
+    private int[] columnWidth;
     private int numberOfRows;
     private int numberOfColumns;
     private TableRenderer tableRenderer;
-    private TableCreator tableCreator;
+    private TableElementCreator tableElementCreator;
     private String result;
 
 
     private Table(Builder builder) {
         rows = builder.rows;
-        columnsWidth = builder.columnsWidth;
+        columnWidth = builder.columnsWidth;
         numberOfRows = builder.numberOfRows;
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
-        tableCreator = builder.tableCreator;
+        tableElementCreator = builder.tableElementCreator;
     }
 
 
@@ -62,10 +62,10 @@ public class Table {
         }
 
         for (int i = 0; i < numberOfRows; i++) {
-            table.append(this.tableCreator.createLine(numberOfColumns, this.columnsWidth));
-            table.append(this.tableCreator.createRow(this.rows.get(i), columnsWidth));
+            table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
+            table.append(this.tableElementCreator.createRow(this.rows.get(i), columnWidth));
             if (i == numberOfRows - 1) {
-                table.append(this.tableCreator.createLine(numberOfColumns, this.columnsWidth));
+                table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
             }
         }
         this.result = table.toString();
@@ -90,13 +90,13 @@ public class Table {
         private List<String[]> rows;
         private int[] columnsWidth;
         private TableRenderer tableRenderer;
-        private TableCreator tableCreator;
+        private TableElementCreator tableElementCreator;
 
 
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
-            this.tableCreator = new TableCreator();
+            this.tableElementCreator = new TableElementCreator();
         }
 
 
@@ -137,8 +137,8 @@ public class Table {
             return this;
         }
 
-        public Builder withTableCreator(TableCreator val) {
-            this.tableCreator = val;
+        public Builder withTableCreator(TableElementCreator val) {
+            this.tableElementCreator = val;
             return this;
         }
 

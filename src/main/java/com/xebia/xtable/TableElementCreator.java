@@ -2,12 +2,12 @@ package com.xebia.xtable;
 
 import java.util.Collections;
 
-public class TableCreator {
+public class TableElementCreator {
 
-    public String createLine(int numberOfColumns, int[] columnWidths) {
+    public String createLine(int numberOfColumns, int[] columnWidth) {
         StringBuilder lineString = new StringBuilder();
         for (int i = 0; i < numberOfColumns; i++) {
-            String line = String.join("", Collections.nCopies(columnWidths[i] +
+            String line = String.join("", Collections.nCopies(columnWidth[i] +
                     TableConstants.VERTICAL_SEP.length() + 1, TableConstants.HORIZONTAL_SEP));
             lineString.append(TableConstants.JOIN_SEP).append(line);
             if (i == numberOfColumns - 1) {
@@ -20,13 +20,13 @@ public class TableCreator {
     }
 
 
-    public String createRow(String[] row, int[] columnWidths) {
+    public String createRow(String[] row, int[] columnWidth) {
         StringBuilder rowString = new StringBuilder();
 
         for (int i = 0; i < row.length; i++) {
             String cell = row[i];
             String verStrTemp = i == row.length - 1 ? TableConstants.VERTICAL_SEP : "";
-            rowString.append(TableConstants.VERTICAL_SEP).append(String.format("%1$-" + (columnWidths[i] + TableConstants.VERTICAL_SEP.length() + 1) + "s",
+            rowString.append(TableConstants.VERTICAL_SEP).append(String.format("%1$-" + (columnWidth[i] + TableConstants.VERTICAL_SEP.length() + 1) + "s",
                     " " + cell)).append(verStrTemp);
         }
         rowString.append("\n");
