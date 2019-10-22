@@ -1,6 +1,6 @@
 package com.xebia.xtable.renderer;
 
- class ConsoleBasedRenderer implements TableRenderer {
+class ConsoleBasedRenderer implements TableRenderer {
 
 
     @Override

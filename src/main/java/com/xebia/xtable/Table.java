@@ -26,18 +26,18 @@ public class Table {
     }
 
 
-    public Table insertRow(String... newRow) {
-        if (Objects.isNull(newRow) || this.numberOfColumns != newRow.length) {
+    public Table insertRow(String... rowCells) {
+        if (Objects.isNull(rowCells) || this.numberOfColumns != rowCells.length) {
             throw new IllegalArgumentException("row data is invalid");
         }
-        this.rows.add(newRow);
+        this.rows.add(rowCells);
         return this;
     }
 
 
     public String shape() {
         StringBuilder shape = new StringBuilder();
-        shape.append(this.numberOfRows).append("x").append(this.numberOfColumns);
+        shape.append(this.numberOfRows).append(TableConstants.CROSS_SIGN).append(this.numberOfColumns);
         return shape.toString();
     }
 
@@ -72,12 +72,10 @@ public class Table {
         return table.toString();
     }
 
-    private void createEmptyRows(int differenceInRows) {
-        for (int i = 0; i < differenceInRows; i++) {
+    private void createEmptyRows(int rowsToAdd) {
+        for (int i = 0; i < rowsToAdd; i++) {
             String[] row = new String[numberOfColumns];
-            for (int j = 0; j < numberOfColumns; j++) {
-                row[j] = " ";
-            }
+            Arrays.fill(row, TableConstants.EMPTY_CELL);
             this.rows.add(row);
         }
     }
