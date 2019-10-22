@@ -29,7 +29,7 @@ public class TableElementCreator {
                 throw new IllegalArgumentException("column width should be greater or equal to " + TableConstants.MIN_COLUMN_WIDTH);
             }
             if (cell.length() > columnWidth[i]) {
-                cell = new StringBuilder(cell.substring(0, columnWidth[i] - 3)).append("...").toString();
+                cell = new StringBuilder(cell.substring(0, columnWidth[i] - 3)).append(TableConstants.TRUNCATE_STRING).toString();
             }
             String verStrTemp = i == row.length - 1 ? TableConstants.VERTICAL_SEP : "";
             rowString.append(TableConstants.VERTICAL_SEP).append(String.format("%1$-" + (columnWidth[i] + TableConstants.VERTICAL_SEP.length() + 1) + "s",
