@@ -12,9 +12,8 @@ public class Table {
     private int numberOfRows;
     private int numberOfColumns;
     private TableRenderer tableRenderer;
-    private TableElementCreator tableElementCreator;
+    private LayoutManager layoutManager;
     private String result;
-    private TableLayout tableLayout;
 
 
     private Table(Builder builder) {
@@ -23,8 +22,7 @@ public class Table {
         numberOfRows = builder.numberOfRows;
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
-        tableElementCreator = builder.tableElementCreator;
-        tableLayout = builder.tableLayout;
+        layoutManager = builder.layoutManager;
     }
 
 
@@ -38,9 +36,7 @@ public class Table {
 
 
     public String shape() {
-        StringBuilder shape = new StringBuilder();
-        shape.append(this.numberOfRows).append(TableConstants.CROSS_SIGN).append(this.numberOfColumns);
-        return shape.toString();
+       return this.layoutManager.shape(this.numberOfRows,this.numberOfColumns);
     }
 
 
@@ -63,19 +59,8 @@ public class Table {
             createEmptyRows(differenceInRows);
         }
 
-        if (this.tableLayout == TableLayout.VERTICAL) {
-            createVerticalData();
-        }
-
-        for (int i = 0; i < numberOfRows; i++) {
-            table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
-            table.append(this.tableElementCreator.createRow(this.rows.get(i), columnWidth));
-            if (i == numberOfRows - 1) {
-                table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
-            }
-        }
-        this.result = table.toString();
-        return result;
+        this.result = this.layoutManager.create(this.rows, this.columnWidth);
+        return this.result;
     }
 
     private void createEmptyRows(int rowsToAdd) {
@@ -86,24 +71,6 @@ public class Table {
         }
     }
 
-    private void createVerticalData() {
-        List<String[]> verticalRows = new ArrayList<>();
-        Arrays.sort(this.columnWidth);
-        int max = this.columnWidth[this.columnWidth.length - 1];
-        for (int i = 0; i < this.numberOfColumns; i++) {
-            String[] verticalRow = new String[numberOfRows];
-            this.columnWidth = new int[numberOfRows];
-            for (int j = 0; j < this.numberOfRows; j++) {
-                verticalRow[j] = this.rows.get(j)[i];
-                this.columnWidth[j] = max;
-            }
-            verticalRows.add(verticalRow);
-        }
-        this.rows = verticalRows;
-        this.numberOfRows = this.numberOfRows + this.numberOfColumns;
-        this.numberOfColumns = this.numberOfRows - this.numberOfColumns;
-        this.numberOfRows = this.numberOfRows - this.numberOfColumns;
-    }
 
     public static final class Builder {
 
@@ -113,14 +80,13 @@ public class Table {
         private int[] columnWidth;
         private TableRenderer tableRenderer;
         private TableElementCreator tableElementCreator;
-        private TableLayout tableLayout;
+        private LayoutManager layoutManager;
 
 
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
-            this.tableElementCreator = new TableElementCreator();
-            this.tableLayout = TableLayout.HORIZONTAL;
+            this.layoutManager = new HorizontalLayout(new TableElementCreator());
         }
 
 
@@ -161,13 +127,9 @@ public class Table {
             return this;
         }
 
-        public Builder withTableElementCreator(TableElementCreator val) {
-            this.tableElementCreator = val;
-            return this;
-        }
 
-        public Builder withTableLayout(TableLayout val) {
-            this.tableLayout = val;
+        public Builder withTableLayout(LayoutManager val) {
+            this.layoutManager = val;
             return this;
         }
 
