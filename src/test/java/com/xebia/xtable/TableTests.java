@@ -182,6 +182,26 @@ public class TableTests {
 
     }
 
+    @Test
+    public void should_create_table_with_vertical_layout_when_valid_data_rows_and_header_are_provided() {
+        Table table = new Table.Builder()
+                .withNumberOfRows(4)
+                .withNumberOfColumns(2)
+                .withColumnWidth(5, 15)
+                .withHeaderRow("sno", "name")
+                .withTableLayout(TableLayout.VERTICAL)
+                .build();
+        String result = table.insertRow("1", "himank")
+                .insertRow("2", "akash")
+                .insertRow("3", "varun")
+                .create();
+        String expected = "+-----------------+-----------------+-----------------+-----------------+\n" +
+                          "| sno             | 1               | 2               | 3               |\n" +
+                          "+-----------------+-----------------+-----------------+-----------------+\n" +
+                          "| name            | himank          | akash           | varun           |\n" +
+                          "+-----------------+-----------------+-----------------+-----------------+\n";
+        assertThat(result).isEqualTo(expected);
+    }
 
 
 }

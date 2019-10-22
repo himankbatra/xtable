@@ -14,6 +14,7 @@ public class Table {
     private TableRenderer tableRenderer;
     private TableElementCreator tableElementCreator;
     private String result;
+    private TableLayout tableLayout;
 
 
     private Table(Builder builder) {
@@ -23,6 +24,7 @@ public class Table {
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
         tableElementCreator = builder.tableElementCreator;
+        tableLayout = builder.tableLayout;
     }
 
 
@@ -61,6 +63,10 @@ public class Table {
             createEmptyRows(differenceInRows);
         }
 
+        if (this.tableLayout == TableLayout.VERTICAL) {
+            createVerticalData();
+        }
+
         for (int i = 0; i < numberOfRows; i++) {
             table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
             table.append(this.tableElementCreator.createRow(this.rows.get(i), columnWidth));
@@ -69,7 +75,7 @@ public class Table {
             }
         }
         this.result = table.toString();
-        return table.toString();
+        return result;
     }
 
     private void createEmptyRows(int rowsToAdd) {
@@ -80,6 +86,24 @@ public class Table {
         }
     }
 
+    private void createVerticalData() {
+        List<String[]> verticalRows = new ArrayList<>();
+        Arrays.sort(this.columnWidth);
+        int max = this.columnWidth[this.columnWidth.length - 1];
+        for (int i = 0; i < this.numberOfColumns; i++) {
+            String[] verticalRow = new String[numberOfRows];
+            this.columnWidth = new int[numberOfRows];
+            for (int j = 0; j < this.numberOfRows; j++) {
+                verticalRow[j] = this.rows.get(j)[i];
+                this.columnWidth[j] = max;
+            }
+            verticalRows.add(verticalRow);
+        }
+        this.rows = verticalRows;
+        this.numberOfRows = this.numberOfRows + this.numberOfColumns;
+        this.numberOfColumns = this.numberOfRows - this.numberOfColumns;
+        this.numberOfRows = this.numberOfRows - this.numberOfColumns;
+    }
 
     public static final class Builder {
 
@@ -89,12 +113,14 @@ public class Table {
         private int[] columnWidth;
         private TableRenderer tableRenderer;
         private TableElementCreator tableElementCreator;
+        private TableLayout tableLayout;
 
 
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
             this.tableElementCreator = new TableElementCreator();
+            this.tableLayout = TableLayout.HORIZONTAL;
         }
 
 
@@ -137,6 +163,11 @@ public class Table {
 
         public Builder withTableElementCreator(TableElementCreator val) {
             this.tableElementCreator = val;
+            return this;
+        }
+
+        public Builder withTableLayout(TableLayout val) {
+            this.tableLayout = val;
             return this;
         }
 
