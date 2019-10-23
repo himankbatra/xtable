@@ -1,5 +1,7 @@
 package com.xebia.xtable;
 
+import com.xebia.xtable.layout.LayoutManager;
+
 import java.util.Scanner;
 
 public class XtableApp {
@@ -17,16 +19,15 @@ public class XtableApp {
             columnWidth[i] = scanner.nextInt();
         }
         scanner.nextLine();
-        System.out.println("Enter Table Layout: ");
+        System.out.println("Enter Table Layout : ");
 
-       String tableLayout=scanner.nextLine();
-        LayoutManager layoutManager= new HorizontalLayout(new TableElementCreator());
-       if(tableLayout.equalsIgnoreCase("vertical"))
-       {
-           layoutManager= new VerticalLayout(new TableElementCreator());
-       }
+        String tableLayout = scanner.nextLine();
+        LayoutManager layoutManager = LayoutManager.HorizontalLayout();
+        if (tableLayout.equalsIgnoreCase("vertical")) {
+            layoutManager = LayoutManager.VerticalLayout();
+        }
 
-        System.out.println("Enter Header Row: ");
+        System.out.println("Enter Header Row : ");
         String[] headerRow = new String[noOfColumns];
         for (int i = 0; i < noOfColumns; i++) {
             headerRow[i] = scanner.nextLine();
@@ -39,7 +40,7 @@ public class XtableApp {
                 .withTableLayout(layoutManager)
                 .build();
 
-        System.out.println("Enter Row Data : ");
+        System.out.println("Enter Rows Data : ");
 
         for (int i = 1; i < noOfRows; i++) {
             String[] row = new String[noOfColumns];

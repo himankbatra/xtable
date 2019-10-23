@@ -1,34 +1,30 @@
-package com.xebia.xtable;
+package com.xebia.xtable.layout;
+
+import com.xebia.xtable.Elements;
+import com.xebia.xtable.TableConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class VerticalLayout implements LayoutManager {
-
-    private TableElementCreator tableElementCreator;
-
-    public VerticalLayout(TableElementCreator tableElementCreator) {
-        this.tableElementCreator = tableElementCreator;
-    }
-
+ class VerticalLayout implements LayoutManager {
 
 
     @Override
-    public String create(List<String[]> rows, int[] columnWidth) {
+    public String create(List<String[]> rowsData, int[] columnWidth) {
         StringBuilder table = new StringBuilder();
-        int numberOfRows=rows.size();
-        int numberOfColumns=rows.get(0).length;
+        int numberOfRows=rowsData.size();
+        int numberOfColumns=rowsData.get(0).length;
         Arrays.sort(columnWidth);
         int maximumColumnWidth = columnWidth[columnWidth.length - 1];
         columnWidth = new int[numberOfRows];
         Arrays.fill(columnWidth,maximumColumnWidth);
-        rows=transformToVertical(rows);
+        rowsData=transformToVertical(rowsData);
         for (int col = 0; col < numberOfColumns; col++) {
-            table.append(this.tableElementCreator.createLine(numberOfRows, columnWidth));
-            table.append(this.tableElementCreator.createRow(rows.get(col), columnWidth));
+            table.append(Elements.createLine(numberOfRows, columnWidth));
+            table.append(Elements.createRow(rowsData.get(col), columnWidth));
             if (col == numberOfColumns - 1) {
-                table.append(this.tableElementCreator.createLine(numberOfRows, columnWidth));
+                table.append(Elements.createLine(numberOfRows, columnWidth));
             }
         }
         return table.toString();
@@ -37,15 +33,15 @@ public class VerticalLayout implements LayoutManager {
     private List<String[]> transformToVertical(List<String[]> rowsToTransform) {
         int numberOfRows=rowsToTransform.size();
         int numberOfColumns=rowsToTransform.get(0).length;
-        List<String[]> transformedRows = new ArrayList<>();
+        List<String[]> verticalRowsData = new ArrayList<>();
         for (int col = 0; col < numberOfColumns; col++) {
             String[] verticalRow = new String[numberOfRows];
             for (int row = 0; row < numberOfRows; row++) {
                 verticalRow[row] = rowsToTransform.get(row)[col];
             }
-            transformedRows.add(verticalRow);
+            verticalRowsData.add(verticalRow);
         }
-        return transformedRows;
+        return verticalRowsData;
     }
 
     @Override
