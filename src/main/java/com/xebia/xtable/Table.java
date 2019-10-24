@@ -80,7 +80,6 @@ public class Table {
         private List<String[]> rows;
         private int[] columnWidth;
         private TableRenderer tableRenderer;
-        private Elements elements;
         private TableLayout tableLayout;
 
 
