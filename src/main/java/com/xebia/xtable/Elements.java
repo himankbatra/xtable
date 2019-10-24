@@ -2,9 +2,9 @@ package com.xebia.xtable;
 
 import java.util.Collections;
 
-public class TableElementCreator {
+public abstract class Elements  {
 
-    public String createLine(int numberOfColumns, int[] columnWidth) {
+    public static String createLine(int numberOfColumns, int[] columnWidth) {
         StringBuilder lineString = new StringBuilder();
         for (int i = 0; i < numberOfColumns; i++) {
             String line = String.join("", Collections.nCopies(columnWidth[i] +
@@ -20,7 +20,7 @@ public class TableElementCreator {
     }
 
 
-    public String createRow(String[] row, int[] columnWidth) {
+    public static String createRow(String[] row, int[] columnWidth) {
         StringBuilder rowString = new StringBuilder();
 
         for (int i = 0; i < row.length; i++) {

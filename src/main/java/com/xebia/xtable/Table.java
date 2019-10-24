@@ -1,28 +1,29 @@
 package com.xebia.xtable;
 
 
+import com.xebia.xtable.layout.TableLayout;
 import com.xebia.xtable.renderer.TableRenderer;
 
 import java.util.*;
 
 public class Table {
 
-    private List<String[]> rows;
+    private List<String[]> rowsData;
     private int[] columnWidth;
     private int numberOfRows;
     private int numberOfColumns;
     private TableRenderer tableRenderer;
-    private TableElementCreator tableElementCreator;
+    private TableLayout tableLayout;
     private String result;
 
 
     private Table(Builder builder) {
-        rows = builder.rows;
+        rowsData = builder.rows;
         columnWidth = builder.columnWidth;
         numberOfRows = builder.numberOfRows;
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
-        tableElementCreator = builder.tableElementCreator;
+        tableLayout = builder.tableLayout;
     }
 
 
@@ -30,15 +31,13 @@ public class Table {
         if (Objects.isNull(rowCells) || this.numberOfColumns != rowCells.length) {
             throw new IllegalArgumentException("row data is invalid");
         }
-        this.rows.add(rowCells);
+        this.rowsData.add(rowCells);
         return this;
     }
 
 
     public String shape() {
-        StringBuilder shape = new StringBuilder();
-        shape.append(this.numberOfRows).append(TableConstants.CROSS_SIGN).append(this.numberOfColumns);
-        return shape.toString();
+        return this.tableLayout.shape(this.numberOfRows, this.numberOfColumns);
     }
 
 
@@ -53,7 +52,7 @@ public class Table {
 
         StringBuilder table = new StringBuilder();
 
-        int differenceInRows = this.numberOfRows - this.rows.size();
+        int differenceInRows = this.numberOfRows - this.rowsData.size();
         if (differenceInRows < 0) {
             throw new InputMismatchException("Data rows exceeded the number of rows");
         }
@@ -61,22 +60,15 @@ public class Table {
             createEmptyRows(differenceInRows);
         }
 
-        for (int i = 0; i < numberOfRows; i++) {
-            table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
-            table.append(this.tableElementCreator.createRow(this.rows.get(i), columnWidth));
-            if (i == numberOfRows - 1) {
-                table.append(this.tableElementCreator.createLine(numberOfColumns, this.columnWidth));
-            }
-        }
-        this.result = table.toString();
-        return table.toString();
+        this.result = this.tableLayout.create(this.rowsData, this.columnWidth);
+        return this.result;
     }
 
     private void createEmptyRows(int rowsToAdd) {
         for (int i = 0; i < rowsToAdd; i++) {
             String[] row = new String[numberOfColumns];
             Arrays.fill(row, TableConstants.EMPTY_CELL);
-            this.rows.add(row);
+            this.rowsData.add(row);
         }
     }
 
@@ -88,13 +80,13 @@ public class Table {
         private List<String[]> rows;
         private int[] columnWidth;
         private TableRenderer tableRenderer;
-        private TableElementCreator tableElementCreator;
+        private TableLayout tableLayout;
 
 
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
-            this.tableElementCreator = new TableElementCreator();
+            this.tableLayout = TableLayout.horizontalLayout();
         }
 
 
@@ -135,8 +127,9 @@ public class Table {
             return this;
         }
 
-        public Builder withTableElementCreator(TableElementCreator val) {
-            this.tableElementCreator = val;
+
+        public Builder withTableLayout(TableLayout val) {
+            this.tableLayout = val;
             return this;
         }
 
