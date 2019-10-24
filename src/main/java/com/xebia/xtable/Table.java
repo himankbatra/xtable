@@ -1,7 +1,7 @@
 package com.xebia.xtable;
 
 
-import com.xebia.xtable.layout.LayoutManager;
+import com.xebia.xtable.layout.TableLayout;
 import com.xebia.xtable.renderer.TableRenderer;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class Table {
     private int numberOfRows;
     private int numberOfColumns;
     private TableRenderer tableRenderer;
-    private LayoutManager layoutManager;
+    private TableLayout tableLayout;
     private String result;
 
 
@@ -23,7 +23,7 @@ public class Table {
         numberOfRows = builder.numberOfRows;
         numberOfColumns = builder.numberOfColumns;
         tableRenderer = builder.tableRenderer;
-        layoutManager = builder.layoutManager;
+        tableLayout = builder.tableLayout;
     }
 
 
@@ -37,7 +37,7 @@ public class Table {
 
 
     public String shape() {
-        return this.layoutManager.shape(this.numberOfRows, this.numberOfColumns);
+        return this.tableLayout.shape(this.numberOfRows, this.numberOfColumns);
     }
 
 
@@ -60,7 +60,7 @@ public class Table {
             createEmptyRows(differenceInRows);
         }
 
-        this.result = this.layoutManager.create(this.rowsData, this.columnWidth);
+        this.result = this.tableLayout.create(this.rowsData, this.columnWidth);
         return this.result;
     }
 
@@ -81,13 +81,13 @@ public class Table {
         private int[] columnWidth;
         private TableRenderer tableRenderer;
         private Elements elements;
-        private LayoutManager layoutManager;
+        private TableLayout tableLayout;
 
 
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
-            this.layoutManager = LayoutManager.HorizontalLayout();
+            this.tableLayout = TableLayout.HorizontalLayout();
         }
 
 
@@ -129,8 +129,8 @@ public class Table {
         }
 
 
-        public Builder withTableLayout(LayoutManager val) {
-            this.layoutManager = val;
+        public Builder withTableLayout(TableLayout val) {
+            this.tableLayout = val;
             return this;
         }
 

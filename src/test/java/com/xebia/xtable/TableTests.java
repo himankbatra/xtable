@@ -1,6 +1,6 @@
 package com.xebia.xtable;
 
-import com.xebia.xtable.layout.LayoutManager;
+import com.xebia.xtable.layout.TableLayout;
 import org.junit.Test;
 
 import java.util.InputMismatchException;
@@ -190,7 +190,7 @@ public class TableTests {
                 .withNumberOfColumns(2)
                 .withColumnWidth(5, 15)
                 .withHeaderRow("sno", "name")
-                .withTableLayout(LayoutManager.VerticalLayout())
+                .withTableLayout(TableLayout.VerticalLayout())
                 .build();
         String result = table.insertRow("1", "himank")
                 .insertRow("2", "akash")

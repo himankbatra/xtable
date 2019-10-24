@@ -5,7 +5,7 @@ import com.xebia.xtable.TableConstants;
 
 import java.util.List;
 
-class HorizontalLayout implements LayoutManager {
+class HorizontalTableLayout implements TableLayout {
 
 
     @Override

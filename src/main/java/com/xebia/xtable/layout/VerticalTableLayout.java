@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
- class VerticalLayout implements LayoutManager {
+ class VerticalTableLayout implements TableLayout {
 
 
     @Override
