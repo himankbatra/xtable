@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface TableLayout {
 
-   static HorizontalTableLayout HorizontalLayout()
+   static HorizontalTableLayout horizontalLayout()
    {
       return new HorizontalTableLayout();
    }
 
-   static VerticalTableLayout VerticalLayout()
+   static VerticalTableLayout verticalLayout()
    {
       return new VerticalTableLayout();
    }

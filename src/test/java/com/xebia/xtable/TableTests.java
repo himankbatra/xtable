@@ -190,7 +190,7 @@ public class TableTests {
                 .withNumberOfColumns(2)
                 .withColumnWidth(5, 15)
                 .withHeaderRow("sno", "name")
-                .withTableLayout(TableLayout.VerticalLayout())
+                .withTableLayout(TableLayout.verticalLayout())
                 .build();
         String result = table.insertRow("1", "himank")
                 .insertRow("2", "akash")

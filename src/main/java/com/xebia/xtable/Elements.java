@@ -2,7 +2,7 @@ package com.xebia.xtable;
 
 import java.util.Collections;
 
-public class Elements  {
+public abstract class Elements  {
 
     public static String createLine(int numberOfColumns, int[] columnWidth) {
         StringBuilder lineString = new StringBuilder();

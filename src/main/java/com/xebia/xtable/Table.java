@@ -86,7 +86,7 @@ public class Table {
         public Builder() {
             this.rows = new ArrayList<>();
             this.tableRenderer = TableRenderer.consoleBasedRender();
-            this.tableLayout = TableLayout.HorizontalLayout();
+            this.tableLayout = TableLayout.horizontalLayout();
         }
 
 
