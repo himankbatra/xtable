@@ -16,6 +16,5 @@ public interface TableLayout {
 
    String create(List<String[]> rows, int[] columnWidth);
 
-   String shape(int numberOfRows,int numberOfColumns);
 
 }
