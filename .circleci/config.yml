@@ -8,3 +8,8 @@ jobs: # a collection of steps
     steps: # a collection of executable commands
       - checkout
       - run: ./mvnw clean install
+
+      #Codecov integration
+      - run:
+        name: Send to CodeCov
+        command: bash <(curl -s https://codecov.io/bash -t c5accb88-5112-4811-8ac4-d3e7c00797e3)
