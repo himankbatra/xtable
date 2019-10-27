@@ -4,7 +4,7 @@
 
 # Codecov
 
-[![codecov](https://codecov.io/gh/himankbatra/xtable/branch/issue-16/graph/badge.svg?token=XrjXEn3aq0)](https://codecov.io/gh/himankbatra/xtable)
+[![codecov](https://codecov.io/gh/himankbatra/xtable/branch/master/graph/badge.svg?token=XrjXEn3aq0)](https://codecov.io/gh/himankbatra/xtable)
 
 # xtable
 
