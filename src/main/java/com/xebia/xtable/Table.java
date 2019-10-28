@@ -37,7 +37,9 @@ public class Table {
 
 
     public String shape() {
-        return this.tableLayout.shape(this.numberOfRows, this.numberOfColumns);
+        StringBuilder shape = new StringBuilder();
+        shape.append(numberOfRows).append(TableConstants.CROSS_SIGN).append(numberOfColumns);
+        return shape.toString();
     }
 
 
@@ -50,7 +52,6 @@ public class Table {
 
     public String create() {
 
-        StringBuilder table = new StringBuilder();
 
         int differenceInRows = this.numberOfRows - this.rowsData.size();
         if (differenceInRows < 0) {

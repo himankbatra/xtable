@@ -6,7 +6,7 @@
 
     <groupId>com.xebia</groupId>
     <artifactId>xtable</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -28,6 +28,14 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub himankbatra Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/himankbatra/xtable</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
 
@@ -35,6 +43,26 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

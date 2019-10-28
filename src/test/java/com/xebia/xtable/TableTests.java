@@ -1,6 +1,7 @@
 package com.xebia.xtable;
 
 import com.xebia.xtable.layout.TableLayout;
+import com.xebia.xtable.renderer.TableRenderer;
 import org.junit.Test;
 
 import java.util.InputMismatchException;
@@ -22,14 +23,14 @@ public class TableTests {
 
 
         String expected = "+------------+------------+------------+------------+\n" +
-                "|            |            |            |            |\n" +
-                "+------------+------------+------------+------------+\n" +
-                "|            |            |            |            |\n" +
-                "+------------+------------+------------+------------+\n" +
-                "|            |            |            |            |\n" +
-                "+------------+------------+------------+------------+\n" +
-                "|            |            |            |            |\n" +
-                "+------------+------------+------------+------------+\n";
+                          "|            |            |            |            |\n" +
+                          "+------------+------------+------------+------------+\n" +
+                          "|            |            |            |            |\n" +
+                          "+------------+------------+------------+------------+\n" +
+                          "|            |            |            |            |\n" +
+                          "+------------+------------+------------+------------+\n" +
+                          "|            |            |            |            |\n" +
+                          "+------------+------------+------------+------------+\n";
 
         //Assert
         assertThat(result).isEqualTo(expected);
@@ -63,14 +64,14 @@ public class TableTests {
                 .build();
         String tableWithHeader = table.create();
         String expected = "+------------+----------------------+\n" +
-                "| sno        | name                 |\n" +
-                "+------------+----------------------+\n" +
-                "|            |                      |\n" +
-                "+------------+----------------------+\n" +
-                "|            |                      |\n" +
-                "+------------+----------------------+\n" +
-                "|            |                      |\n" +
-                "+------------+----------------------+\n";
+                          "| sno        | name                 |\n" +
+                          "+------------+----------------------+\n" +
+                          "|            |                      |\n" +
+                          "+------------+----------------------+\n" +
+                          "|            |                      |\n" +
+                          "+------------+----------------------+\n" +
+                          "|            |                      |\n" +
+                          "+------------+----------------------+\n";
         assertThat(tableWithHeader).isEqualTo(expected);
     }
 
@@ -89,14 +90,14 @@ public class TableTests {
                 .insertRow("3", "varun")
                 .create();
         String expected = "+------------+----------------------+\n" +
-                "| sno        | name                 |\n" +
-                "+------------+----------------------+\n" +
-                "| 1          | himank               |\n" +
-                "+------------+----------------------+\n" +
-                "| 2          | akash                |\n" +
-                "+------------+----------------------+\n" +
-                "| 3          | varun                |\n" +
-                "+------------+----------------------+\n";
+                          "| sno        | name                 |\n" +
+                          "+------------+----------------------+\n" +
+                          "| 1          | himank               |\n" +
+                          "+------------+----------------------+\n" +
+                          "| 2          | akash                |\n" +
+                          "+------------+----------------------+\n" +
+                          "| 3          | varun                |\n" +
+                          "+------------+----------------------+\n";
         assertThat(result).isEqualTo(expected);
     }
 
@@ -142,14 +143,14 @@ public class TableTests {
 
         String shape = table.shape();
         String expected = "+-------+-----------------+\n" +
-                "| sno   | name            |\n" +
-                "+-------+-----------------+\n" +
-                "| 1     | himank          |\n" +
-                "+-------+-----------------+\n" +
-                "| 2     | akash           |\n" +
-                "+-------+-----------------+\n" +
-                "| 3     | varun           |\n" +
-                "+-------+-----------------+\n";
+                          "| sno   | name            |\n" +
+                          "+-------+-----------------+\n" +
+                          "| 1     | himank          |\n" +
+                          "+-------+-----------------+\n" +
+                          "| 2     | akash           |\n" +
+                          "+-------+-----------------+\n" +
+                          "| 3     | varun           |\n" +
+                          "+-------+-----------------+\n";
         assertThat(result).isEqualTo(expected);
         assertThat(shape).isEqualTo("4x2");
 
@@ -171,14 +172,14 @@ public class TableTests {
                 .create();
 
         String expected = "+-------+-------+\n" +
-                "| sno   | name  |\n" +
-                "+-------+-------+\n" +
-                "| 1     | hi... |\n" +
-                "+-------+-------+\n" +
-                "| 2     | akash |\n" +
-                "+-------+-------+\n" +
-                "| 3     | varun |\n" +
-                "+-------+-------+\n";
+                          "| sno   | name  |\n" +
+                          "+-------+-------+\n" +
+                          "| 1     | hi... |\n" +
+                          "+-------+-------+\n" +
+                          "| 2     | akash |\n" +
+                          "+-------+-------+\n" +
+                          "| 3     | varun |\n" +
+                          "+-------+-------+\n";
         assertThat(result).isEqualTo(expected);
 
     }
@@ -190,6 +191,7 @@ public class TableTests {
                 .withNumberOfColumns(2)
                 .withColumnWidth(5, 15)
                 .withHeaderRow("sno", "name")
+                .withTableRender(TableRenderer.consoleBasedRender())
                 .withTableLayout(TableLayout.verticalLayout())
                 .build();
         String result = table.insertRow("1", "himank")
@@ -198,12 +200,12 @@ public class TableTests {
                 .create();
         String shape = table.shape();
         String expected = "+-----------------+-----------------+-----------------+-----------------+\n" +
-                "| sno             | 1               | 2               | 3               |\n" +
-                "+-----------------+-----------------+-----------------+-----------------+\n" +
-                "| name            | himank          | akash           | varun           |\n" +
-                "+-----------------+-----------------+-----------------+-----------------+\n";
+                          "| sno             | 1               | 2               | 3               |\n" +
+                          "+-----------------+-----------------+-----------------+-----------------+\n" +
+                          "| name            | himank          | akash           | varun           |\n" +
+                          "+-----------------+-----------------+-----------------+-----------------+\n";
         assertThat(result).isEqualTo(expected);
-        assertThat(shape).isEqualTo("2x4");
+        assertThat(shape).isEqualTo("4x2");
     }
 
 

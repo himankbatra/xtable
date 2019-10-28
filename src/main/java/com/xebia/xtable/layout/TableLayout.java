@@ -4,18 +4,15 @@ import java.util.List;
 
 public interface TableLayout {
 
-   static HorizontalTableLayout horizontalLayout()
-   {
-      return new HorizontalTableLayout();
-   }
+    static HorizontalTableLayout horizontalLayout() {
+        return new HorizontalTableLayout();
+    }
 
-   static VerticalTableLayout verticalLayout()
-   {
-      return new VerticalTableLayout();
-   }
+    static VerticalTableLayout verticalLayout() {
+        return new VerticalTableLayout();
+    }
 
-   String create(List<String[]> rows, int[] columnWidth);
+    String create(List<String[]> rows, int[] columnWidth);
 
-   String shape(int numberOfRows,int numberOfColumns);
 
 }

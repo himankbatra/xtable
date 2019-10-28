@@ -2,6 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/himankbatra/xtable.svg?style=svg&circle-token=3c690ed73165d2c5d248de0a71f645b736cb48f0)](https://circleci.com/gh/himankbatra/xtable)
 
+# Codecov
+
+[![codecov](https://codecov.io/gh/himankbatra/xtable/branch/master/graph/badge.svg?token=XrjXEn3aq0)](https://codecov.io/gh/himankbatra/xtable)
+
 # xtable
 
  It is a common requirement in most command-line applications to render output in the horizontalTable format. An example horizontalTable is shown below.
