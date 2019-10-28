@@ -208,5 +208,61 @@ public class TableTests {
         assertThat(shape).isEqualTo("4x2");
     }
 
+    @Test
+    public void should_throw_exception_when_null_header_data_row_is_passed() {
+
+        try {
+            new Table.Builder()
+                    .withNumberOfRows(4)
+                    .withNumberOfColumns(2)
+                    .withColumnWidth(5)
+                    .withHeaderRow()
+                    .build();
+            fail("Should throw exception");
+        } catch (Exception e) {
+            assertThat(e).isInstanceOf(IllegalArgumentException.class);
+            assertThat(e.getMessage()).isEqualTo("row data is invalid");
+        }
+
+    }
+
+
+    @Test
+    public void should_throw_exception_when_null_data_row_is_passed() {
+
+        Table table = new Table.Builder()
+                    .withNumberOfRows(4)
+                    .withNumberOfColumns(2)
+                    .withColumnWidth(5)
+                    .withHeaderRow("sno", "name")
+                    .build();
+        try {
+            table.insertRow();
+            fail("Should throw exception");
+        } catch (Exception e) {
+            assertThat(e).isInstanceOf(IllegalArgumentException.class);
+            assertThat(e.getMessage()).isEqualTo("row data is invalid");
+        }
+
+    }
+
+
+    @Test
+    public void should_throw_exception_when_null_column_width_is_passed() {
+
+        try {
+            new Table.Builder()
+                .withNumberOfRows(4)
+                .withNumberOfColumns(2)
+                .withColumnWidth()
+                .withHeaderRow("sno", "name")
+                .build();
+            fail("Should throw exception");
+        } catch (Exception e) {
+            assertThat(e).isInstanceOf(IllegalArgumentException.class);
+            assertThat(e.getMessage()).isEqualTo("number of columns width should be equal to number of columns");
+        }
+
+    }
 
 }

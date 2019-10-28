@@ -4,7 +4,11 @@ package com.xebia.xtable;
 import com.xebia.xtable.layout.TableLayout;
 import com.xebia.xtable.renderer.TableRenderer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Objects;
 
 public class Table {
 
@@ -28,7 +32,8 @@ public class Table {
 
 
     public Table insertRow(String... rowCells) {
-        if (Objects.isNull(rowCells) || this.numberOfColumns != rowCells.length) {
+        if (Objects.isNull(rowCells) || rowCells.length == 0
+                || this.numberOfColumns != rowCells.length) {
             throw new IllegalArgumentException("row data is invalid");
         }
         this.rowsData.add(rowCells);
@@ -44,9 +49,7 @@ public class Table {
 
 
     public void render() {
-
         this.tableRenderer.render(result);
-
     }
 
 
@@ -104,16 +107,18 @@ public class Table {
         }
 
         public Builder withHeaderRow(String... val) {
-            if (Objects.isNull(val) || (this.numberOfColumns != val.length)) {
-                throw new IllegalArgumentException("rows data is invalid");
+            if (Objects.isNull(val) || val.length == 0  || (this.numberOfColumns != val.length)) {
+                throw new IllegalArgumentException("row data is invalid");
             }
             this.rows.add(val);
             return this;
         }
 
         public Builder withColumnWidth(int... val) {
-            if (Objects.isNull(val) || (val.length > 1 && val.length != this.numberOfColumns)) {
-                throw new IllegalArgumentException("number of columns width should be equal to number of columns");
+            if (Objects.isNull(val) || val.length == 0
+                    || (val.length > 1 && val.length != this.numberOfColumns)) {
+                throw new IllegalArgumentException("number of columns width "
+                        + "should be equal to number of columns");
             }
             if (val.length == 1) {
                 Arrays.fill(columnWidth, val[0]);
