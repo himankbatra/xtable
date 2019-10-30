@@ -4,7 +4,8 @@ xtable is a Java library for rendering the data in Table with Horizontal or Vert
 
 ## Getting Started
 
-To use xtable in your application, you have to add s to your classpath. strman is available on Maven Central so you just need to add dependency in your favorite build tool as shown below.
+To use xtable in your application, you have to add xtable to your classpath.You just need to add dependency in your
+ favorite build tool as shown below.
 
 For Apache Maven users, please add following to your pom.xml.
 
