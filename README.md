@@ -1,31 +1,66 @@
-# CircleCI
+# xtable [![CircleCI](https://circleci.com/gh/himankbatra/xtable.svg?style=svg&circle-token=3c690ed73165d2c5d248de0a71f645b736cb48f0)](https://circleci.com/gh/himankbatra/xtable) [![codecov](https://codecov.io/gh/himankbatra/xtable/branch/master/graph/badge.svg?token=XrjXEn3aq0)](https://codecov.io/gh/himankbatra/xtable)
 
-[![CircleCI](https://circleci.com/gh/himankbatra/xtable.svg?style=svg&circle-token=3c690ed73165d2c5d248de0a71f645b736cb48f0)](https://circleci.com/gh/himankbatra/xtable)
+xtable is a Java library for rendering the data in Table with Horizontal or Vertical Layout.
 
-# Codecov
+## Getting Started
 
-[![codecov](https://codecov.io/gh/himankbatra/xtable/branch/master/graph/badge.svg?token=XrjXEn3aq0)](https://codecov.io/gh/himankbatra/xtable)
+To use xtable in your application, you have to add s to your classpath. strman is available on Maven Central so you just need to add dependency in your favorite build tool as shown below.
 
-# xtable
+For Apache Maven users, please add following to your pom.xml.
 
- It is a common requirement in most command-line applications to render output in the horizontalTable format. An example horizontalTable is shown below.
+```
+<dependencies>
+   <dependency>
+            <groupId>com.xebia</groupId>
+            <artifactId>xtable</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+</dependencies>
+```
 
-![img](https://lh5.googleusercontent.com/tSinvEdjj3w5WWl58hwJ3vqSr1wJWq3TKwLp1gW3iFW2FUJdf3jTWVN_ljTfXSnp9vKjLwgtNRXrVbq6yaXWRaxj3nMGVLY5ByBArTSKKI7SkllxR7xk-nW0BSc6LW4A1T2NojF_)
+Gradle users can add following to their build.gradle file.
 
-In the image shown above, a 4x4 horizontalTable was generated. The first row was used for headings and rest of the rows were data
- rows.
+```
+compile(group: 'com.xebia', name: 'xtable', version: '0.1.0')
+```
 
-The 0.1.0 version of the xtable library should support following features:
-Ability to create an empty horizontalTable of m rows and n columns.Ability to create a horizontalTable with headerAbility to create a horizontalTable with header row and data rowsAbility to specify column widths. If the text of the column does not fit the column then it text should be truncated and … should be shown at the endDifferent columns can have different widthsLibrary should support both horizontal and vertical tablesLibrary should throw exceptions when data is invalid.
+## Usage
+
+```
+import com.xebia.xtable.Table; // import xtable package
 
 
-Example of horizontal and vertical tables are shown below.
+  Table table = new Table.Builder()
+                         .withNumberOfRows(3) // enter total number of rows
+                         .withNumberOfColumns(2) // enter total number of columns
+            			 .withColumnWidth(10,20) // enter column widths of each column
+                         .withHeaderRow("Sno.","Name").build(); // enter header row  
 
-##### Horizontal Table
+  table.insertRow("1","himank")
+       .insertRow("2","akash").create(); // insert rows data and then create table
 
-![img](https://lh6.googleusercontent.com/GMzUmkW8-AN_v9B7BIPAmoDf_VFRhka81M4CLn_O9NGT781-m-9-jFoo_btqM_khpPi7Fc4nGlKl3MCoQXioax2RS9Y0FO1mSeZNfdgEASVQ6rcoeHLlOoilrluEnze-mMUGFGp4)
+  table.render(); // render created table
 
-##### Vertical Table
+  System.out.println("Shape of the table is "+table.shape()); // print shape of table
+```
 
-![img](https://lh6.googleusercontent.com/HD6E-qHcbZL2ZORBbIjWLaL9rFr6wrgJ6ydJbROlONXBZHWxn9z6eDEc9rMn2tgq9S8g_VAivRW8zNj94K-dOAKlv8yaDfpj6PJNbGwcnwUlSYpxekHSo9BjFjdh4L1j9EEflHs6)
+## Output
 
+```
+
++------------+----------------------+
+| Sno.       | Name                 |
++------------+----------------------+
+| 1          | himank               |
++------------+----------------------+
+| 2          | akash                |
++------------+----------------------+
+
+Shape of the table is 2x3
+
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
