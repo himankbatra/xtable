@@ -4,6 +4,14 @@
         "http://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
+    <property name="cacheFile" value="${checkstyle.cache.file}"/>
+
+    <!-- Checks for Size Violations.                    -->
+    <!-- See http://checkstyle.sf.net/config_sizes.html -->
+    <module name="LineLength">
+        <property name="max" value="100"/>
+    </module>
+
     <module name="SuppressWarningsFilter"/>
     <module name="NewlineAtEndOfFile"/>
     <module name="FileLength"/>
@@ -28,7 +36,7 @@
     </module>
 
     <module name="TreeWalker">
-        <property name="cacheFile" value="${checkstyle.cache.file}"/>
+
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
@@ -62,11 +70,7 @@
         </module>
 
 
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <property name="max" value="100"/>
-        </module>
+
         <module name="MethodLength">
             <property name="max" value="200"/>
         </module>
